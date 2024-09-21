@@ -16,10 +16,10 @@ public class UserModel implements Serializable{
 	public UserModel() {
 		super();
 	}
-	public UserModel(int id, String username, String email, String password, String fullname, String images,
-			String phone, int roleid, Date createDate) {
+	
+	public UserModel(String username, String email, String password, String fullname, String images, String phone,
+			int roleid, Date createDate) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -29,6 +29,7 @@ public class UserModel implements Serializable{
 		this.roleid = roleid;
 		this.createDate = createDate;
 	}
+
 	public int getId() {
 		return id;
 	}

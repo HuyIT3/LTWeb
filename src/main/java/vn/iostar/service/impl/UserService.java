@@ -1,11 +1,16 @@
 package vn.iostar.service.impl;
 
+
+
+import java.util.logging.Logger;
+
 import vn.iostar.controllers.models.UserModel;
 import vn.iostar.dao.IUserDao;
 import vn.iostar.dao.impl.UserDaoImpl;
 import vn.iostar.service.IUserService;
 
 public class UserService implements IUserService{
+	private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 	IUserDao userDao = new UserDaoImpl();
 	@Override
 	public UserModel findByUserName(String username) {
@@ -21,6 +26,49 @@ public class UserService implements IUserService{
 			return user;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean register(String userName, String password, String email, String fullname, String phone) {
+		if (userDao.checkExistUsername(userName)) {
+			return false;
+			}
+			long millis=System.currentTimeMillis();
+			java.sql.Date date=new java.sql.Date(millis);
+			userDao.insert(new UserModel(userName,email, password, fullname,null,phone,5,date));
+			return true;
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		
+		return userDao.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		
+		return userDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		
+		return userDao.checkExistPhone(phone);
+	}
+
+	@Override
+	public boolean resetPass(String email, String password) {
+		return false;
+	}
+	public static void main(String[] args) {
+		try {
+			IUserService userService = new UserService();
+			System.out.println(userService.login("huy","123"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
