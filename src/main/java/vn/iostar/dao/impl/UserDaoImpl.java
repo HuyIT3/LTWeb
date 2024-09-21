@@ -135,7 +135,20 @@ public class UserDaoImpl implements IUserDao{
 					e.printStackTrace();
 				}
 	}
-
+	public void updatePassword(String email, String newPassword) {
+		String sql="UPDATE users SET password = ? WHERE email=?";
+		try (Connection conn = DBConnectMySQL.getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)){
+			ps.setString(1, newPassword);
+			ps.setString(2,email);
+			ps.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	@Override
 	public boolean checkExistEmail(String email) {
 		String query = "select * from users where email = ?";
@@ -192,6 +205,8 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return false;
 	}
+
+	
 	
 
 }

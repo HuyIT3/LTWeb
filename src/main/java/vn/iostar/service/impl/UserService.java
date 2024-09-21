@@ -2,6 +2,7 @@ package vn.iostar.service.impl;
 
 
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import vn.iostar.controllers.models.UserModel;
@@ -59,7 +60,14 @@ public class UserService implements IUserService{
 
 	@Override
 	public boolean resetPass(String email, String password) {
-		return false;
+		LOGGER.log(Level.INFO, "Attemping to reset password for email: {0}", email);
+		if (!userDao.checkExistEmail(email)) {
+			LOGGER.log(Level.WARNING, "Email does not exist: {0}", email);
+			return false;
+		}
+		userDao.updatePassword(email, password);
+		LOGGER.log(Level.INFO, "Password reset successful for email: {0}", email);
+		return true;
 	}
 	public static void main(String[] args) {
 		try {

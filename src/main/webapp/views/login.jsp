@@ -106,7 +106,7 @@ span.psw {
     <button type="button" class="cancelbtn" >Cancel</button>
 
 	<button type="button" class="register" onclick="window.location.href='${pageContext.request.contextPath}/register'">Register</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+    <span class="psw">Forgot <a href="${pageContext.request.contextPath}/views/resetpass.jsp">password?</a></span>
   </div>
 </form>
 
