@@ -1,0 +1,11 @@
+package vn.iostar.dao;
+
+import java.util.List;
+
+import vn.iostar.controllers.models.UserModel;
+
+public interface IUserDao {
+	UserModel findByUsername(String username);
+	UserModel findById(int id);
+	List<UserModel> findAll();
+}
