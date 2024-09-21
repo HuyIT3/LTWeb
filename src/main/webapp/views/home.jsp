@@ -8,5 +8,8 @@
 </head>
 <body>
 	trang chủ của user
+	 <form action="${pageContext.request.contextPath}/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>
